@@ -1,0 +1,71 @@
+.boton{
+	text-decoration: none;
+	font-family: arial, helvetica, sans-serif;
+	background: #ccc;
+	padding: 10px 30px;
+	border-radius: 5px;
+	color: #333;
+}
+.boton-rojo{
+	@extend .boton;
+	background: red;
+}
+
+.boton-grande{
+	@extend .boton;
+	font-size: 20px;
+	padding: 20px 50px;
+}
+
+@mixin border-radius($valor){
+	border-radius: $valor
+	//ms , o , kit, moz
+}
+.caja1, .caja2{
+	width: 100px;
+	height: 100px;
+	background: red;
+	@include border-radius(10px)
+}
+
+.caja2	{
+	@include border-radius(50px);
+}
+
+@mixin circulear($tamano, $color){
+	width: $tamano;
+	height: $tamano;
+	background: $color;
+	@include border-radius (50%);
+	display: inline-block;
+}
+
+.circulo1{
+	@include circulear(100px, red);
+}
+.circulo2{
+	@include circulear(300px, green)
+}
+
+@mixin hacer-boton($tamano-letra,$color, $background, $vertical, $horizontal, $tamano-borde, $color-borde){
+	font-family: arial, helvetica, sans-serif;
+	font-size: $tamano-letra;
+	background: $background;
+	padding:$vertical $horizontal;
+	border-radius: 5px;
+	text-decoration: none;
+	color: $color;
+	transition: 1s;
+	border: $tamano-borde $color-borde solid;
+	display: inline-block;
+	&:hover{
+		background: darken($background, 20%);
+		transform: scale(1.4);
+	}
+}
+.boton-principal{
+	@include hacer-boton(12px,blue, yellow, 10px, 40px, 1px, grey)
+}
+.boton-secundario{
+	@include hacer-boton(12px, black, limegreen, 10px, 40px, 2px, red)
+}
